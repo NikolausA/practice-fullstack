@@ -14,14 +14,8 @@ app.use(express.json());
 
 app.use("/", routes);
 
-mongoose
-  .connect(
-    "mongodb+srv://nikaleksenko:an3KaRbbFRhb40i4@cluster0.vxcl4ie.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`App listen on port ${port}`);
-    });
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING).then(() => {
+  app.listen(port, () => {
+    console.log(`App listen on port ${port}`);
   });
-
-//process.env.MONGODB_CONNECTION_STRING
+});
